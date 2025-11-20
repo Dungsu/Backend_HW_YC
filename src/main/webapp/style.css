@@ -1,0 +1,255 @@
+@charset "UTF-8";
+
+/* [Global Reset & Base] */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    background-color: #121212; /* 딥 다크 배경 */
+    color: #eee;
+    height: 100vh;
+    overflow: hidden; /* 스크롤 방지 */
+    display: flex;
+}
+
+/* [Sidebar] - 고정형 */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #000;
+    border-right: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    
+    /* 위치 고정 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.logo-box {
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 50px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.nav-menu { list-style: none; }
+.nav-menu li { margin-bottom: 25px; }
+.nav-menu a {
+    text-decoration: none;
+    color: #888;
+    font-size: 1.1rem;
+    display: block;
+    transition: 0.3s;
+}
+.nav-menu a:hover { color: #fff; transform: translateX(5px); }
+
+/* [Main Content] - 사이드바 제외 영역 */
+.main-content {
+    /* 사이드바 너비(250px)만큼 밀고, 나머지 너비를 차지 */
+    margin-left: 250px;
+    width: calc(100vw - 250px); 
+    height: 100vh;
+    position: relative; /* 자식 요소(auth)의 기준점 */
+    
+    /* 내부 요소 정중앙 정렬 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* [Top Right Auth] - 우측 상단 고정 */
+.top-auth {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    display: flex; /* 버튼 가로 정렬 */
+    gap: 15px; /* 버튼 사이 간격 */
+    z-index: 10;
+}
+
+.top-auth a {
+    text-decoration: none;
+    color: #ccc;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border: 1px solid #555;
+    border-radius: 20px; /* 둥근 버튼 스타일 */
+    transition: all 0.3s ease;
+}
+
+.top-auth a:hover {
+    background-color: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+/* [Stage Area] - 카드와 버튼들 그룹 */
+.stage-area {
+    display: flex;
+    align-items: center;
+    gap: 40px; /* 좌우 버튼과 폰 사이 간격 */
+}
+
+/* [Action Buttons] - X, Heart */
+.action-btn {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    border: 2px solid #444;
+    background-color: #1e1e1e;
+    font-size: 1.6rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 텐션감 있는 애니메이션 */
+}
+
+.action-btn:hover { transform: scale(1.15); background-color: #333; border-color: #666; }
+.btn-x { color: #ff5e57; }
+.btn-heart { color: #2ecc71; }
+
+/* [Phone Frame] - 메인 카드 */
+.phone-frame {
+    width: 340px;
+    height: 620px;
+    max-height: 85vh; /* 화면이 작아도 잘리지 않게 */
+    background-color: #1e1e1e;
+    border: 4px solid #444;
+    border-radius: 0px;
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+    position: relative;
+}
+
+/* 폰 내부 요소들 */
+.music-info-box {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    background: #252525;
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid #333;
+}
+.music-title { font-size: 1.2rem; font-weight: bold; color: #fff; margin-bottom: 5px; }
+.artist-name { color: #aaa; font-size: 0.95rem; }
+
+.media-area {
+    width: 100%;
+    flex-grow: 1; /* 남은 공간 채우기 */
+    max-height: 280px;
+    background: #000;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border: 1px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.media-area img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
+
+.api-note { font-size: 0.75rem; color: #555; margin-bottom: 15px; }
+
+/* 진행 바 */
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #333;
+    border-radius: 3px;
+    margin-bottom: 25px;
+    position: relative;
+}
+.progress-fill {
+    width: 40%;
+    height: 100%;
+    background: #fff;
+    border-radius: 3px;
+}
+.progress-knob {
+    position: absolute;
+    left: 40%;
+    top: -5px;
+    width: 16px;
+    height: 16px;
+    background: #1e1e1e;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* 하단 컨트롤 영역 */
+.controls-area {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+/* 토글 스위치 */
+.toggle-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+.toggle-label { font-size: 0.7rem; color: #888; font-weight: bold; margin-left: 2px;}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #555;
+    transition: .4s;
+    border-radius: 34px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+input:checked + .slider { background-color: #2ecc71; }
+input:checked + .slider:before { transform: translateX(20px); }
+
+/* 재생 버튼 */
+.play-btn {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #eee;
+    color: #121212; /* 아이콘 색상 반전 */
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(255,255,255,0.1);
+}
+.play-btn:hover { transform: scale(1.05); background: #fff; }
